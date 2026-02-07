@@ -1,6 +1,7 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include "../include/cat.h"
+#include <stdlib.h>
+
+#include "cat.h"
 
 struct cat* cat_create() {
   struct cat* cat_ptr = (struct cat*) malloc(sizeof(struct cat));

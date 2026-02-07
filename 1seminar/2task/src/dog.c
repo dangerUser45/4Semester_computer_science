@@ -1,5 +1,6 @@
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <sys/random.h>
 
 #include "animal.h"
 
@@ -7,7 +8,6 @@
 
 struct dog {
   struct animal super;
-
   int teeth;
 };
 
@@ -15,11 +15,11 @@ void dog_voice(struct dog* dog) {
   printf("гав-гав: %s\n", dog->super.name);
 }
 
-double dog_bite(struct dog* dog, int teeth) {
-  double damage = (double)(dog->teeth + rand()%10);
-  printf("Я %s. Укусила на урон = %f\n",
-         dog->super.name, damage);
-  return damage;
+void dog_bite(struct dog* dog, int teeth) {
+  unsigned int damage = 0;
+  getrandom(&damage, sizeof(unsigned int), 0);
+  printf("Я %s. Укусила на урон = %d\n",
+         dog->super.name, damage % 10);
 }
 
 void dog_destroy(struct dog* dog) {
@@ -27,7 +27,7 @@ void dog_destroy(struct dog* dog) {
 }
 
 struct dog* dog_create_with_init(char* name) {
-  struct dog* dog_ptr = malloc(sizeof(struct dog));
+  struct dog* dog_ptr = calloc(sizeof(struct dog), 1);
   dog_ptr->super.name = name;
   dog_ptr->teeth = NUM_TEETH;
   dog_ptr->super.vt.voice   = (animal_voice_t)dog_voice;

@@ -1,6 +1,7 @@
-#include <stdlib.h>
 #include <stdio.h>
-#include "../include/dog.h"
+#include <stdlib.h>
+
+#include "dog.h"
 
 struct dog* dog_create() {
   struct dog* dog_ptr = (struct dog*) malloc(sizeof(struct dog));

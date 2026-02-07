@@ -1,5 +1,5 @@
-#include "../include/dog.h"
-#include "../include/cat.h"
+#include "cat.h"
+#include "dog.h"
 
 int main() {
   struct dog* dog_default = dog_create();
